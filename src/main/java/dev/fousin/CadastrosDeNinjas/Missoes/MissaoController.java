@@ -3,35 +3,37 @@ package dev.fousin.CadastrosDeNinjas.Missoes;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/missoes")
 public class MissaoController {
 
     //adicionar missao
-    @PostMapping("/missao")
-    public String create(){
-        return "Cadastrado com sucesso";
-    }
-    //mostrar todos os missaos
-    @GetMapping("/missoes")
-    public String getmissaos(){
+    @PostMapping("")
+    public String createMissao() {
         return "Cadastrado com sucesso";
     }
 
+    //mostrar todos os missaos
+    @GetMapping("")
+    public String missoes(){
+        return "todas as missoes";
+    }
+
+
     //procurar missao por id
-    @GetMapping("/missao/{id}")
-    public String getmissaoById(@PathVariable Long id){
-        return "missao encontrado" + id;
+    @GetMapping("/{id}")
+    public String getMissaoById(@PathVariable Long id){
+        return "missao encontrad " + id;
     }
 
     //aterar dados
-    @PutMapping("/missao/{id}")
-    public String updatemissao(@PathVariable Long id){
-        return "missao atualizado" + id;
+    @PutMapping("/{id}")
+    public String updateMissao(@PathVariable Long id){
+        return "missao atualizada " + id;
     }
 
     //deletar missao
-    @DeleteMapping("/missao/{id}")
-    public String deletemissao(@PathVariable Long id){
-        return "missao deletado" + id;
+    @DeleteMapping("/{id}")
+    public String deleteMissao(@PathVariable Long id){
+        return "missao deletada " + id;
     }
 }
