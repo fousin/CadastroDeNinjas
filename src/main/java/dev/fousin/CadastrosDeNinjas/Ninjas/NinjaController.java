@@ -2,9 +2,16 @@ package dev.fousin.CadastrosDeNinjas.Ninjas;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ninjas")
 public class NinjaController {
+    private NinjaService ninjaService;
+
+    public NinjaController(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
+    }
 
     //adicionar ninja
     @PostMapping("")
@@ -14,8 +21,8 @@ public class NinjaController {
 
     //mostrar todos os ninjas
     @GetMapping("")
-    public String getNinjas() {
-        return "Cadastrado com sucesso";
+    public List<NinjaModel> getNinjas() {
+        return ninjaService.getNinjas();
     }
 
     //procurar ninja por id
