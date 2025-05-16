@@ -1,2 +1,1 @@
--- add rank column to TB_NINJAS table
 ALTER TABLE TB_NINJAS ADD COLUMN rank VARCHAR(255);
