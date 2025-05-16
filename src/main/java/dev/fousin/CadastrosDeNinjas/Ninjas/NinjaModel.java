@@ -6,11 +6,11 @@ import lombok.*;
 
 import java.util.List;
 
-@Entity
 @Table(name="tb_ninjas")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Entity
 public class NinjaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
