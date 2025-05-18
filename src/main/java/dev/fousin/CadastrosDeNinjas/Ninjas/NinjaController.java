@@ -15,7 +15,8 @@ public class NinjaController {
 
     //adicionar ninja
     @PostMapping("")
-    public String createNinja() {
+    public String createNinja(@RequestBody NinjaModel ninja) {
+        ninjaService.createNinja(ninja);
         return "Cadastrado com sucesso";
     }
 
@@ -27,20 +28,24 @@ public class NinjaController {
 
     //procurar ninja por id
     @GetMapping("/{id}")
-    public String getNinjaById(@PathVariable Long id) {
-        return "ninja encontrado" + id;
+    public NinjaModel getNinjaById(@PathVariable Long id) {
+        return ninjaService.getNinja(id);
     }
 
     //aterar dados
     @PutMapping("/{id}")
-    public String updateNinja(@PathVariable Long id) {
-        return "ninja atualizado" + id;
+    public String updateNinja(@PathVariable Long id, @RequestBody NinjaModel atualizacao) {
+        NinjaModel ninja = ninjaService.updateNinja(id, atualizacao);
+        if(ninja != null){
+            return "Ninja Atualizado com sucesso";
+        }
+        return "Ninja não encontrado";
     }
 
     //deletar ninja
     @DeleteMapping("/{id}")
     public String deleteNinja(@PathVariable Long id) {
-        return "ninja deletado" + id;
+        return ninjaService.deleteNinja(id);
     }
 
 
