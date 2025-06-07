@@ -37,7 +37,7 @@ public class MissaoService {
         return missaoRepository.save(missao);
     }
 
-    public String delteMissao(Long id) {
+    public String deleteMissao(Long id) {
         MissaoModel missao = getMissao(id);
         if (missao == null) {
             return "Missão não encontrada";

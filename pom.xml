@@ -57,7 +57,7 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
-w	</dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>

@@ -15,7 +15,7 @@ public class NinjaController {
 
     //adicionar ninja
     @PostMapping("")
-    public String createNinja(@RequestBody NinjaModel ninja) {
+    public String createNinja(@RequestBody NinjaDTO ninja) {
         ninjaService.createNinja(ninja);
         return "Cadastrado com sucesso";
     }
@@ -34,12 +34,8 @@ public class NinjaController {
 
     //aterar dados
     @PutMapping("/{id}")
-    public String updateNinja(@PathVariable Long id, @RequestBody NinjaModel atualizacao) {
-        NinjaModel ninja = ninjaService.updateNinja(id, atualizacao);
-        if(ninja != null){
-            return "Ninja Atualizado com sucesso";
-        }
-        return "Ninja não encontrado";
+    public NinjaDTO updateNinja(@PathVariable Long id, @RequestBody NinjaDTO atualizacao) {
+        return ninjaService.updateNinja(id, atualizacao);
     }
 
     //deletar ninja

@@ -1,17 +1,22 @@
 package dev.fousin.CadastrosDeNinjas.Ninjas;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Data
 @Service
 public class NinjaService {
 
-    final NinjaRepository ninjaRepository;
+    private NinjaRepository ninjaRepository;
+    private NinjaMapper ninjaMapper;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
     public List<NinjaModel> getNinjas(){
@@ -23,30 +28,25 @@ public class NinjaService {
         return ninja.orElse(null);
     }
 
-    public NinjaModel createNinja(NinjaModel ninja){
-        return ninjaRepository.save(ninja);
+    public NinjaDTO createNinja(NinjaDTO ninjaDTO){
+        NinjaModel ninja = ninjaMapper.map(ninjaDTO);
+        ninja = ninjaRepository.save(ninja);
+        return ninjaMapper.map(ninja);
     }
 
-    public NinjaModel updateNinja(Long id, NinjaModel atualizado){
-        NinjaModel ninja = getNinja(id);
+    public NinjaDTO updateNinja(Long id, NinjaDTO ninjaDTo){
+        NinjaModel ninja = ninjaRepository.findById(id).orElse(null);
         if(ninja != null){
-            ninja.setNome(atualizado.getNome());
-            ninja.setEmail(atualizado.getEmail());
-            ninja.setImgUrl(atualizado.getImgUrl());
-            ninja.setIdade(atualizado.getIdade());
-            ninja.setMissoes(atualizado.getMissoes());
-            return ninjaRepository.save(ninja);
+            ninja = ninjaMapper.map(ninjaDTo);
+            ninja = ninjaRepository.save(ninja);
+            return ninjaMapper.map(ninja);
         }
         return null;
     }
 
     public String deleteNinja(Long id){
-        NinjaModel ninja = getNinja(id);
-        if(ninja != null){
-            ninjaRepository.delete(ninja);
-            return "Ninja deletado com sucesso";
-        }
-        return "Ninja não encontrado";
+        ninjaRepository.deleteById(id) ;
+        return "Ninja deletado com sucesso";
     }
 
 }
