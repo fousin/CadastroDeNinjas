@@ -7,7 +7,6 @@ import lombok.*;
 import java.util.List;
 
 @Table(name = "tb_ninjas")
-@NoArgsConstructor
 @Entity
 @Data
 public class NinjaModel {
@@ -33,6 +32,8 @@ public class NinjaModel {
     @ManyToOne
     @JoinColumn(name = "missao_id") //fk
     private MissaoModel missoes;
+
+    public NinjaModel(){}
 
     public NinjaModel(Long id, String nome, String email, String imgUrl, int idade, String rank, MissaoModel missoes) {
     }

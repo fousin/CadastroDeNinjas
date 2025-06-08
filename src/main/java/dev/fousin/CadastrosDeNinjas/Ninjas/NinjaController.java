@@ -15,20 +15,19 @@ public class NinjaController {
 
     //adicionar ninja
     @PostMapping("")
-    public String createNinja(@RequestBody NinjaDTO ninja) {
-        ninjaService.createNinja(ninja);
-        return "Cadastrado com sucesso";
+    public NinjaDTO createNinja(@RequestBody NinjaDTO ninja) {
+        return ninjaService.createNinja(ninja);
     }
 
     //mostrar todos os ninjas
     @GetMapping("")
-    public List<NinjaModel> getNinjas() {
+    public List<NinjaDTO> getNinjas() {
         return ninjaService.getNinjas();
     }
 
     //procurar ninja por id
     @GetMapping("/{id}")
-    public NinjaModel getNinjaById(@PathVariable Long id) {
+    public NinjaDTO getNinjaById(@PathVariable Long id) {
         return ninjaService.getNinja(id);
     }
 

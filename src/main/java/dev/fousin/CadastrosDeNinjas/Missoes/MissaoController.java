@@ -15,13 +15,13 @@ public class MissaoController {
 
     //adicionar missao
     @PostMapping("")
-    public String createMissao() {
-        return "Cadastrado com sucesso";
+    public MissaoDTO createMissao(@RequestBody MissaoDTO missao) {
+        return missaoService.createMissao(missao);
     }
 
     //mostrar todos os missaos
     @GetMapping("")
-    public List<MissaoModel> missoes(){
+    public List<MissaoDTO> missoes(){
         return missaoService.getMissoes();
     }
 
@@ -34,7 +34,7 @@ public class MissaoController {
 
     //aterar dados
     @PutMapping("/{id}")
-    public String updateMissao(@PathVariable Long id, @RequestBody MissaoModel atualizacao){
+    public String updateMissao(@PathVariable Long id, @RequestBody MissaoDTO atualizacao){
         return "missao atualizada " + missaoService.updateMissao(id, atualizacao);
     }
 

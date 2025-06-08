@@ -1,50 +1,49 @@
 package dev.fousin.CadastrosDeNinjas.Missoes;
 
+import dev.fousin.CadastrosDeNinjas.Ninjas.NinjaModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MissaoService {
-    MissaoRepository missaoRepository;
-
-    public MissaoService(MissaoRepository missaoRepository) {
+    private MissaoRepository missaoRepository;
+    private MissaoMapper missaoMapper;
+    public MissaoService(MissaoRepository missaoRepository, MissaoMapper missaoMapper) {
         this.missaoRepository = missaoRepository;
+        this.missaoMapper = missaoMapper;
     }
 
-    public MissaoModel createMissao(MissaoModel missao) {
-        return missaoRepository.save(missao);
+    public MissaoDTO createMissao(MissaoDTO missaoDTO) {
+        MissaoModel missao = missaoMapper.map(missaoDTO);
+        missao = missaoRepository.save(missao);
+        return missaoMapper.map(missao);
     }
 
-    public List<MissaoModel> getMissoes() {
-        return missaoRepository.findAll();
+    public List<MissaoDTO> getMissoes() {
+        return missaoRepository.findAll().stream().map(missaoMapper::map).toList();
     }
 
-    public MissaoModel getMissao(Long id) {
-        return missaoRepository.findById(id).orElse(null);
+    public MissaoDTO getMissao(Long id) {
+        Optional<MissaoModel> missao = missaoRepository.findById(id);
+        return missao.map(missaoMapper::map).orElse(null);
     }
 
-    public MissaoModel updateMissao(Long id, MissaoModel atualizado) {
-        MissaoModel missao = getMissao(id);
-        if (missao == null) {
-            return null;
-        }
+    public MissaoDTO updateMissao(Long id, MissaoDTO atualizado) {
+        Optional<MissaoModel> missao = missaoRepository.findById(id);
+        if(!missao.isPresent()){ return null; }
 
-        missao.setNome(atualizado.getNome());
-        missao.setDificuldade(atualizado.getDificuldade());
-        missao.setNinjas(atualizado.getNinjas());
+        MissaoModel missaoAtualizado = missaoMapper.map(atualizado);
+        missaoAtualizado.setId(id);
+        MissaoModel missaoSalva = missaoRepository.save(missaoAtualizado);
 
-        return missaoRepository.save(missao);
+        return missaoMapper.map(missaoSalva);
     }
 
     public String deleteMissao(Long id) {
-        MissaoModel missao = getMissao(id);
-        if (missao == null) {
-            return "Missão não encontrada";
-        }
-
-        missaoRepository.delete(missao);
-        return "Missão deletada com sucesso";
+        missaoRepository.deleteById(id);
+        return "Missao deletada com sucesso";
     }
 
 }

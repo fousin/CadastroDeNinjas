@@ -6,26 +6,26 @@ import org.springframework.stereotype.Component;
 public class NinjaMapper {
 
     public NinjaModel map(NinjaDTO ninjaDTO){
-        return new NinjaModel(
-                ninjaDTO.getId(),
-                ninjaDTO.getNome(),
-                ninjaDTO.getEmail(),
-                ninjaDTO.getImgUrl(),
-                ninjaDTO.getIdade(),
-                ninjaDTO.getRank(),
-                ninjaDTO.getMissoes()
-        );
+        NinjaModel ninjaModel = new NinjaModel();
+        ninjaModel.setId(ninjaDTO.getId());
+        ninjaModel.setNome(ninjaDTO.getNome());
+        ninjaModel.setEmail(ninjaDTO.getEmail());
+        ninjaModel.setImgUrl(ninjaDTO.getImgUrl());
+        ninjaModel.setIdade(ninjaDTO.getIdade());
+        ninjaModel.setRank(ninjaDTO.getRank());
+        ninjaModel.setMissoes(ninjaDTO.getMissoes());
+        return ninjaModel;
     }
 
     public NinjaDTO map(NinjaModel ninjaModel){
-        return new NinjaDTO(
-                ninjaModel.getId(),
-                ninjaModel.getNome(),
-                ninjaModel.getEmail(),
-                ninjaModel.getImgUrl(),
-                ninjaModel.getIdade(),
-                ninjaModel.getRank(),
-                ninjaModel.getMissoes()
-        );
+        NinjaDTO ninjaDTO = new NinjaDTO();
+        ninjaDTO.setId(ninjaModel.getId());
+        ninjaDTO.setNome(ninjaModel.getNome());
+        ninjaDTO.setEmail(ninjaModel.getEmail());
+        ninjaDTO.setImgUrl(ninjaModel.getImgUrl());
+        ninjaDTO.setIdade(ninjaModel.getIdade());
+        ninjaDTO.setRank(ninjaModel.getRank());
+        ninjaDTO.setMissoes(ninjaModel.getMissoes());
+        return ninjaDTO;
     }
 }

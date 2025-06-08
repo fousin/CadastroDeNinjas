@@ -4,8 +4,6 @@ import dev.fousin.CadastrosDeNinjas.Missoes.MissaoModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@Data
 public class NinjaDTO {
     private Long id;
     private String nome;
@@ -17,6 +15,7 @@ public class NinjaDTO {
 
     public NinjaDTO(Long id, String nome, String email, String imgUrl, int idade, String rank, MissaoModel missoes) {
     }
+    public NinjaDTO(){}
 
     public Long getId() {
         return id;
@@ -56,6 +55,7 @@ public class NinjaDTO {
     public void setIdade(int idade) {
         this.idade = idade;
     }
+
     public MissaoModel getMissoes() {
         return missoes;
     }

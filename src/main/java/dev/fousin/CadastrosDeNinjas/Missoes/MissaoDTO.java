@@ -1,30 +1,19 @@
 package dev.fousin.CadastrosDeNinjas.Missoes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.fousin.CadastrosDeNinjas.Ninjas.NinjaModel;
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Entity
-@Table(name="tb_missoes")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class MissaoModel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+public class MissaoDTO {
     private Long id;
-
     private String nome;
-
     private String dificuldade;
-
-    //@OneToMany uma missao pode ter varios ninjas
-    @OneToMany(mappedBy = "missoes")
-    @JsonIgnore
     private List<NinjaModel> ninjas;
 
     public Long getId() {
